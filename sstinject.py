@@ -19,8 +19,6 @@ def main():
     thread = args.thread
     output = args.output
 
-    payload = "SsTiinjectionSsTi"
-
     urls = URL()
 
     # Remove duplicates
@@ -36,7 +34,8 @@ def main():
     for parser_url in url:
         parser = Parser(parser_url)
         for p in payloads:
-            parsed_urls_params = parser.parser_params(p)
+            payload_str = f"SsTi{p}SsTi"
+            parsed_urls_params = parser.parser_params(payload_str)
             if parsed_urls_params and parsed_urls_params not in parsed_urls:
                 parsed_urls.append(parsed_urls_params)
 
