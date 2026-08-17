@@ -54,7 +54,11 @@ def main():
                 # Check if vulnerable
                 check_ssti = ssti.check_ssti(urls, body)
                 if check_ssti:
-                    print(f"Vulnerable: \033[92m{urls}\033[00m")
+                    for vuln_url in check_ssti:
+                        print(f"Vulnerable: \033[92m{vuln_url}\033[00m")
+                        if output:
+                            write_file = open(output, "a").write(f"{vuln_url}\n")
+
 
 if __name__ == "__main__":
     main()
