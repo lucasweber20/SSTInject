@@ -1,7 +1,9 @@
 import argparse
+import concurrent.futures
 from scripts.URL import URL
 from scripts.Payload import Payload
 from scripts.Parser import Parser
+from scripts.Requests import Requests
 
 
 parser = argparse.ArgumentParser()
@@ -38,6 +40,15 @@ def main():
             parsed_urls_params = parser.parser_params(payload_str)
             if parsed_urls_params and parsed_urls_params not in parsed_urls:
                 parsed_urls.append(parsed_urls_params)
+
+    # Requests
+    req = Requests()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=thread) as executor:
+        futures = [executor.submit(req.requests, url) for url in parsed_urls]
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            if result:
+                pass
 
 if __name__ == "__main__":
     main()
