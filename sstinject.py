@@ -28,8 +28,8 @@ def main():
         url = urls.remove_duplicates(file)
 
     # Generate payloads
-    payload = SSTI()
-    payloads = payload.generate_payloads()
+    ssti = SSTI()
+    payloads = ssti.generate_payloads()
   
     # Parser
     parsed_urls = []
@@ -48,7 +48,13 @@ def main():
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
             if result:
-                pass
+                urls = result[0]
+                body = result[1]
+
+                # Check if vulnerable
+                check_ssti = ssti.check_ssti(urls, body)
+                if check_ssti:
+                    print(f"Vulnerable: \033[92m{urls}\033[00m")
 
 if __name__ == "__main__":
     main()

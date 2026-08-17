@@ -1,4 +1,5 @@
 import yaml
+import re
 
 
 class SSTI:
@@ -15,5 +16,10 @@ class SSTI:
 
         return result
 
-    def check_ssti(self):
-        pass
+    def check_ssti(self, body, url):
+        result = []
+        matches = re.findall(r"SsTi.*SsTi", body)
+        for match in matches:
+            if "49" in match:
+                result.append(url)
+        return result
