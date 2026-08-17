@@ -26,6 +26,8 @@ def main():
     if file:
         url = urls.remove_duplicates(file)
 
+    # Generate payloads
+
     # Parser
     parsed_urls = []
     for parser_url in url:
