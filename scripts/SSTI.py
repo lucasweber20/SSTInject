@@ -1,7 +1,7 @@
 import yaml
 
 
-class Payload:
+class SSTI:
     def __init__(self):
         pass
 
@@ -14,3 +14,6 @@ class Payload:
             result.append(p)
 
         return result
+
+    def check_ssti(self):
+        pass

@@ -1,7 +1,7 @@
 import argparse
 import concurrent.futures
 from scripts.URL import URL
-from scripts.Payload import Payload
+from scripts.SSTI import SSTI
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 
@@ -28,9 +28,9 @@ def main():
         url = urls.remove_duplicates(file)
 
     # Generate payloads
-    payload = Payload()
+    payload = SSTI()
     payloads = payload.generate_payloads()
-
+  
     # Parser
     parsed_urls = []
     for parser_url in url:
